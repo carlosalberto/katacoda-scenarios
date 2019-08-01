@@ -24,7 +24,7 @@ public class Hello {
         span.finish();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         if (args.length != 1) {
             throw new IllegalArgumentException("Expecting one argument");
         }

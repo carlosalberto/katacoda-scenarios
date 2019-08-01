@@ -21,21 +21,20 @@ Let's create an instance of a real tracer, such as Jaeger (http://github.com/ube
 We need to add some imports:
 
 <pre class="file" data-target="clipboard">
-import io.opentracing.Span;
-import io.opentracing.Tracer;
+import com.lightstep.tracer.jre.JRETracer;
+import java.net.MalformedURLException;
 </pre>
 
 And we define a helper function that will create a tracer.
 
 <pre class="file" data-target="clipboard">
-public static Tracer initTracer(String component) {
-	Tracer tracer = new com.lightstep.tracer.jre.JRETracer(
+public static JRETracer initTracer(String component) throws MalformedURLException {
+	return new JRETracer(
 		 new com.lightstep.tracer.shared.Options.OptionsBuilder()
                     .withComponentName(component)
 		    .withAccessToken("{your_access_token}")
 		    .build()
 	);
-        return tracer;
 }
 </pre>
 
@@ -73,26 +72,24 @@ public class Hello {
         span.finish();
     }
 
-    public static Tracer initTracer(String component) {
-	Tracer tracer = new com.lightstep.tracer.jre.JRETracer(
+    public static JRETracer initTracer(String component) throws MalformedURLException {
+	return new JRETracer(
 		 new com.lightstep.tracer.shared.Options.OptionsBuilder()
                     .withComponentName(component)
 		    .withAccessToken("{your_access_token}")
 		    .build()
 	);
-        return tracer;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         if (args.length != 1) {
             throw new IllegalArgumentException("Expecting one argument");
         }
         String helloTo = args[0];
 
-        Tracer tracer = initTracer("hello-world");
+        JRETracer tracer = initTracer("hello-world");
         new Hello(tracer).sayHello(helloTo);
         tracer.close();
-
     }
 }</pre>
 
