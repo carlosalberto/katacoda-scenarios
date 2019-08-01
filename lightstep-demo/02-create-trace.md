@@ -41,4 +41,4 @@ We are using the following basic features of the OpenTracing API:
 * each span must be finished by calling its finish() function
 * the start and end timestamps of the span will be captured automatically by the tracer implementation
 
-However, if we run this program, we will see no difference, and no traces in the tracing UI. That's because the function `GlobalTracer.get()` returns a no-op tracer by default. Try it out: `./run.sh lesson01.exercise.Hello Bryan`{{execute}}
+However, if we run this program, we will see no difference, and no traces in the tracing UI. That's because the function `GlobalTracer.get()` returns a no-op tracer by default. Try it out: `./run.sh lesson01.exercise.Hello Donut`{{execute}}
